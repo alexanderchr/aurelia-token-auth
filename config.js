@@ -14,9 +14,14 @@ System.config({
 
 System.config({
   "map": {
+    "aurelia-http-client": "github:aurelia/http-client@0.10.0",
     "babel": "npm:babel-core@5.8.14",
     "babel-runtime": "npm:babel-runtime@5.8.12",
     "core-js": "npm:core-js@0.9.18",
+    "github:aurelia/http-client@0.10.0": {
+      "aurelia-path": "github:aurelia/path@0.8.0",
+      "core-js": "npm:core-js@0.9.18"
+    },
     "github:jspm/nodelibs-process@0.1.1": {
       "process": "npm:process@0.10.1"
     },

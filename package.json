@@ -48,7 +48,9 @@
     "directories": {
       "lib": "dist/amd"
     },
-    "dependencies": {},
+    "dependencies": {
+      "aurelia-http-client": "github:aurelia/http-client@^0.10.0"
+    },
     "devDependencies": {
       "babel": "npm:babel-core@^5.1.13",
       "babel-runtime": "npm:babel-runtime@^5.1.13",
