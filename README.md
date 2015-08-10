@@ -1,51 +1,44 @@
 # aurelia-token-auth
 
-## Building The Code
+A wrapper around Aurelia's http client that handles token authorization. Works out of the box with [devise_token_auth](https://github.com/lynndylanhurley/devise_token_auth) and is configurable to work with pretty much any token provider that uses headers.
 
-To build the code, follow these steps.
+## Usage
 
-1. Ensure that [NodeJS](http://nodejs.org/) is installed. This provides the platform on which the build tooling runs.
-2. From the project folder, execute the following command:
+```javascript
+var client = TokenAuthHttpClient();
+client.login('username', 'password').then(
+  (response) => {
+    // may be used as a regular aurelia-http-client
+    client.get('super/secret/url').then(
+      (response) => {
+        client.logout();
+      }
+    );
+  }
+);
 
-  ```shell
-  npm install
-  ```
-3. Ensure that [Gulp](http://gulpjs.com/) is installed. If you need to install it, use the following command:
+```
 
-  ```shell
-  npm install -g gulp
-  ```
-4. To build the code, you can now run:
+## Configuration
 
-  ```shell
-  gulp build
-  ```
-5. You will find the compiled code in the `dist` folder, available in three module formats: AMD, CommonJS and ES6.
+```javascript
+var c = client.tokenAuthConfiguration;
+c.loginUrl = '/auth/sign_in'; 
+c.logoutUrl = '/auth/sign_out'; // urls used by the login and logout helpers
+c.identifierField = 'email'; // 'user identifier' field used by login
+c.passwordField = 'password'; 
+c.bearerTokenHeaders = ['Access-Token', 'Client', 'Expiry', 'Token-Type', 'Uid']; // The headers
+// making up the bearer token. These will be retrieved from responses and appended to requests. 
+c.renewBearerToken = false; // Renews bearer token with every response if set to true.
+c.disabled = false; // Disables retrieving and appending bearer tokens
+```
 
-6. See `gulpfile.js` for other tasks related to generating the docs and linting.
+## Notes
 
-## Running The Tests
+* A bearer token will not be saved unless all headers are present in the response.
+* To use the helper methods login and logout, the client has to be configured with a base url.
 
-To run the unit tests, first ensure that you have followed the steps above in order to install all dependencies and successfully build the library. Once you have done that, proceed with these additional steps:
+## Todo
 
-1. Ensure that the [Karma](http://karma-runner.github.io/) CLI is installed. If you need to install it, use the following command:
-
-  ```shell
-  npm install -g karma-cli
-  ```
-2. Ensure that [jspm](http://jspm.io/) is installed. If you need to install it, use the following commnand:
-
-  ```shell
-  npm install -g jspm
-  ```
-3. Install the client-side dependencies with jspm:
-
-  ```shell
-  jspm install
-  ```
-
-4. You can now run the tests with this command:
-
-  ```shell
-  karma start
-  ```
+* Add support for aurelia events.
+* Use same configuration as aurelia-http-client
