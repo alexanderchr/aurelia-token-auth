@@ -11,18 +11,13 @@ System.register([], function (_export) {
     setters: [],
     execute: function () {
       RequestInterceptor = (function () {
-        function RequestInterceptor() {
+        function RequestInterceptor(bearerToken) {
           _classCallCheck(this, RequestInterceptor);
 
-          this.bearerToken = {};
+          this.bearerToken = bearerToken;
         }
 
         _createClass(RequestInterceptor, [{
-          key: "setBearerToken",
-          value: function setBearerToken(bearerToken) {
-            this.bearerToken = bearerToken;
-          }
-        }, {
           key: "request",
           value: function request(message) {
             for (var k in this.bearerToken) {

@@ -1,15 +1,15 @@
 
 export class ResponseInterceptor {
-  constructor(callback, configuration) {
+  constructor(callback, bearerTokenHeaders) {
     this.callback = callback;
-    this.configuration = configuration;
+    this.bearerTokenHeaders = bearerTokenHeaders;
   }
 
   response(message) {
     var bearerToken = { };
     var bearerTokenIncomplete = false;
 
-    for(var k of this.configuration.bearerTokenHeaders) {
+    for(var k of this.bearerTokenHeaders) {
       if(message.headers.get(k)) {
         bearerToken[k] = message.headers.get(k);
       } else {

@@ -10,18 +10,13 @@ define(["exports"], function (exports) {
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
   var RequestInterceptor = (function () {
-    function RequestInterceptor() {
+    function RequestInterceptor(bearerToken) {
       _classCallCheck(this, RequestInterceptor);
 
-      this.bearerToken = {};
+      this.bearerToken = bearerToken;
     }
 
     _createClass(RequestInterceptor, [{
-      key: "setBearerToken",
-      value: function setBearerToken(bearerToken) {
-        this.bearerToken = bearerToken;
-      }
-    }, {
       key: "request",
       value: function request(message) {
         for (var k in this.bearerToken) {

@@ -1,10 +1,6 @@
 
 export class RequestInterceptor {
-  constructor() {
-    this.bearerToken = { };
-  }
-
-  setBearerToken(bearerToken) {
+  constructor(bearerToken) {
     this.bearerToken = bearerToken;
   }
 
